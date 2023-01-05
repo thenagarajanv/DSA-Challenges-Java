@@ -1,0 +1,16 @@
+// https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/description/
+class Solution {
+   public int findMinArrowShots(int[][] points) {
+    if(points==null || points.length==0 || points[0].length==0) return 0;
+    Arrays.sort(points, (a,b)->a[0]==b[0] ? a[1]-b[1] : a[0]-b[0]);
+    int ret = 0, range = points[0][1];
+    for(int[] point : points){
+        if(point[0]>range) {
+            range = point[1];
+            ret++;
+        }
+        else range = Math.min(range, point[1]);
+    }
+    return ret+1;
+}
+}
